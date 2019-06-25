@@ -151,16 +151,16 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable(socket_can_node
-  src/socket_can_node.cpp
+add_executable(test_socket_can_node
+  src/test_socket_can_node.cpp
   lib/socket_can.cpp
 )
 
-target_link_libraries(socket_can_node
+target_link_libraries(test_socket_can_node
    ${catkin_LIBRARIES}
  )
 
- add_dependencies(socket_can_node ${catkin_EXPORTED_TARGETS})
+ add_dependencies(test_socket_can_node ${catkin_EXPORTED_TARGETS})
 #############
 ## Install ##
 #############

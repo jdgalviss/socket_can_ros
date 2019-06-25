@@ -46,7 +46,7 @@ void CANDriver::ListenSocket()
     }
 }
 
-int CANDriver::CANWrite(int can_id, int can_dlc, int *data, int data_size)
+int CANDriver::CANWrite(int can_id, int can_dlc, uint8_t *data, int data_size)
 {
     frame_.can_id = can_id;
     frame_.can_dlc = can_dlc;
