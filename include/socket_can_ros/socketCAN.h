@@ -28,7 +28,7 @@ class CANDriver{
         CANDriver(const char *interface_name);
         ~CANDriver();
 
-        int CANWrite(int can_id, int can_dlc, uint8_t *data, int data_size);
+        int CANWrite(int can_id, int can_data_length, uint8_t *data);
         void ListenSocket();
 
     private:

@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	uint8_t data [2] = {0x11,0x22};
     while (nh.ok())
     {
-		can_driver->CANWrite(0x123,2,data,2);
+		can_driver->CANWrite(0x123,2,data);
         ros::spinOnce();
         r.sleep();
     }

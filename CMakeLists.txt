@@ -11,6 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
+  utils
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,11 +49,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+ add_message_files(
+   FILES
+   PwmOut.msg
+#  Message2.msg
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,10 +70,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -151,16 +153,19 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable(test_socket_can_node
-  src/test_socket_can_node.cpp
+add_executable(socket_can_node
+  src/socket_can_node.cpp
+  src/can_ros.cpp
   lib/socket_can.cpp
 )
 
-target_link_libraries(test_socket_can_node
+target_link_libraries(socket_can_node
    ${catkin_LIBRARIES}
+   utils
  )
 
- add_dependencies(test_socket_can_node ${catkin_EXPORTED_TARGETS})
+add_dependencies(socket_can_node socket_can_ros_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
+
 #############
 ## Install ##
 #############
