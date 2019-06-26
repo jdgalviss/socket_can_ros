@@ -16,6 +16,7 @@ int main(int argc, char **argv)
     ROS_INFO("CAN communication ready!");
     while (n.ok())
     {
+        can_ros->ReadCANBus();
         ros::spinOnce();
         r.sleep();
     }

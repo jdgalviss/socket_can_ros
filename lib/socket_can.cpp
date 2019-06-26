@@ -41,9 +41,19 @@ void CANDriver::ListenSocket()
     printf("ready to read can interface\n");
     while (read_can_port)
     {
-        read(sckt_, &rxmsg, sizeof(rxmsg));
+        read(sckt_, &rx_frame_, sizeof(rxmsg));
+        new_msg_rx = true;
         printf("message received\n");
     }
+}
+
+struct can_frame *CANDriver::ReadMsg()
+{
+    if (new_msg_rx){
+        new_msg_rx = false;
+        return &rx_frame_;
+    }
+    return NULL;
 }
 
 int CANDriver::CANWrite(int can_id, int can_data_length, uint8_t *data)
@@ -55,6 +65,6 @@ int CANDriver::CANWrite(int can_id, int can_data_length, uint8_t *data)
         frame_.data[i] = data[i];
     }
     nbytes_ = write(sckt_, &frame_, sizeof(struct can_frame));
-    printf("Wrote %d bytes\n", nbytes_);
+    //printf("Wrote %d bytes\n", nbytes_);
     return 0;
 }

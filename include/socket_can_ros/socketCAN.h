@@ -19,31 +19,31 @@
 
 #include <linux/can.h>
 #include <linux/can/raw.h>
-#include <string> 
+#include <string>
 #include <thread>
 
+class CANDriver
+{
+public:
+    CANDriver(const char *interface_name);
+    ~CANDriver();
 
-class CANDriver{
-    public:
-        CANDriver(const char *interface_name);
-        ~CANDriver();
+    int CANWrite(int can_id, int can_data_length, uint8_t *data);
+    void ListenSocket();
+    struct can_frame *ReadMsg();
 
-        int CANWrite(int can_id, int can_data_length, uint8_t *data);
-        void ListenSocket();
+private:
+    int sckt_;
+    int nbytes_;
+    struct sockaddr_can addr_;
+    struct can_frame frame_;
+    struct can_frame rx_frame_;
 
-    private:
-        int sckt_;
-        int nbytes_;
-        struct sockaddr_can addr_;
-        struct can_frame frame_;
-        struct ifreq ifr_;
-        const char *ifname_;
+    struct ifreq ifr_;
+    const char *ifname_;
+    bool new_msg_rx = false;
 
-        std::thread listen_thread_;  /**< Thread to listen CAN port */
-
+    std::thread listen_thread_; /**< Thread to listen CAN port */
 };
-
-
-
 
 #endif

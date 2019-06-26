@@ -62,7 +62,7 @@ CANRos::CANRos(ros::NodeHandle *nh)
     raw_pwm_out_.resize(3);
     inverts_.at(0) = -1; //Invert the Steering control
 
-    
+
 }
 
 void CANRos::ActuatorControlCb(const geometry_msgs::TwistStamped::ConstPtr &msg)
@@ -137,3 +137,14 @@ void CANRos::SendMotorsCmd()
     motor_drive_status_pub_.publish(motor_drive_status_);
     pwm_status_pub_.publish(can_driver_status_msg_);
 }
+
+void CANRos::ReadCANBus(){
+    struct can_frame *frame_;
+    frame_ = can_driver_->ReadMsg();
+    if(frame_){
+        for(int i=0; i<frame_->can_dlc; ++i){
+            ROS_INFO("index: %i - value: %i \n", i, frame_->data[i]);
+        }
+    }
+}
+

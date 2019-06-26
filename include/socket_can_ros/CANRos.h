@@ -34,6 +34,8 @@ class CANRos{
     public:
         CANRos(ros::NodeHandle *nh);
         ~CANRos();
+        void ReadCANBus();
+
 
     private:
 	    ros::NodeHandle *n_;					 /**< Reference to the nodehandle so, the position controller can call services, get parameters, subscribe to and publish topics */
@@ -72,6 +74,7 @@ class CANRos{
         uint8_t RadsToDigital(float control);
         bool Arm(mavros_msgs::CommandBool::Request &req, mavros_msgs::CommandBool::Response &res);
         void SendMotorsCmd();
+
 
 };
 #endif
