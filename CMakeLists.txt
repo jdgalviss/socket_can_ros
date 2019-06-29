@@ -52,6 +52,9 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    PwmOut.msg
+   Configuration.msg
+   Motors.msg
+   TestMotors.msg
 #  Message2.msg
  )
 

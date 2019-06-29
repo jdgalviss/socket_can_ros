@@ -1,0 +1,6 @@
+uint8 wheels_baudrate
+uint8 battery_status_baudrate
+uint8 wheel_control_mode
+uint8 operation_mode
+uint8 number_battery_cells
+uint8 motors_model
